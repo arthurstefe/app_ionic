@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Usuários</ion-title>
+    <a ion-item (click)="openModal()">
+      Novo
+    </a>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let user of users">
+      <ion-item>
+        <h2>{{user.login}}</h2>
+        <p>{{user.senha}}</p>
+      </ion-item>
+      <ion-item-options>
+        <a ion-button color="primary" [routerLink]="['/users', user.id]" icon-left>
+          <ion-icon name="text"></ion-icon>
+          Editar
+        </a>
+        <button ion-button color="secondary" (click)="deleteUser(user)" icon-left>
+          <ion-icon name="call"></ion-icon>
+          Deletar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab right bottom>
+    <a ion-fab color="danger" routerLink="/users/new"><ion-icon name="add"></ion-icon></a>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Usuários</ion-title>
+    <a ion-item (click)="openModal()">
+      Novo
+    </a>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let user of users">
+      <a ion-item (click)="openModal(user)">
+        {{user.login}}
+      </a>
+    </ion-item>
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab color="danger" (click)="create(user)"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>
