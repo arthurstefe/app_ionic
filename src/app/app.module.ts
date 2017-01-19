@@ -3,13 +3,12 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { FormsModule } from '@angular/forms';
 
-import { routing } from './app.routing';
 import { UsersComponent } from '../pages/user/users.component';
 import { UserService } from '../pages/user/user.service';
 import { UserFormComponent } from '../pages/user/user-form.component';
 
-// Importa o modulo de rotas do Angular 2
-import { RouterModule} from '@angular/router';
+import { NavController} from 'ionic-angular';
+
 
 @NgModule({
   declarations: [
@@ -19,14 +18,15 @@ import { RouterModule} from '@angular/router';
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    FormsModule,
-    routing
+    FormsModule
   ],
   bootstrap: [
     IonicApp
   ],
   entryComponents: [
-    MyApp
+    MyApp,
+    UsersComponent,
+    UserFormComponent
   ],
   providers: [
     {provide: ErrorHandler,

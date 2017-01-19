@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from './user.service';
 // Importa nosso Model
 import {UserModel} from "./user.model";
-// Importa o Router para podermos conseguir pegar o parâmetro id
-import { Router, ActivatedRoute } from '@angular/router';
+
+import { NavParams } from 'ionic-angular';
+
+import { NavController} from 'ionic-angular';
 
 
 @Component({
@@ -21,40 +23,34 @@ export class UserFormComponent implements OnInit {
   constructor(
     //Declara nossas dependências
     private userService: UserService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    params: NavParams,
+    public nav: NavController
+  ) {
+      this.user = params.data.user ? params.data.user : this.user;
+    }
 
   // Esse método rola enquanto a página é carregada para preencher
   // a question caso seja edição
   ngOnInit() {
-    var id = this.route.params.subscribe(params => {
-      var id = params['id'];
 
-      this.title = id ? 'Edit user' : 'Create user';
+      this.title = this.user.id ? 'Edit user' : 'Create user';
 
-      if (!id)
-        return;
-
-      this.userService.getUser(id)
-        .subscribe(
-          user => this.user = user,
-          response => {});
-    });
-  }
-
-  // Nós chamamos esse método no form quando estamos prontos para criar
-  // uma questão ou editar
-  save() {
-    var result;
-
-    if (this.user.id){
-      result = this.userService.updateUser(this.user);
-    } else {
-      result = this.userService.addUser(this.user);
     }
 
-    result.subscribe(data => this.router.navigate(['/']));
+  save(user) {
+    var result;
+
+    if (user.id){
+      result = this.userService.updateUser(user);
+    } else {
+      result = this.userService.addUser(user);
+    }
+
+    //result.subscribe(data => this.router.navigate(['/']));
+  }
+
+  goBack() {
+    this.nav.pop();
   }
 
 }

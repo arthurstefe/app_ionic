@@ -15,7 +15,7 @@
         <p>{{user.senha}}</p>
       </ion-item>
       <ion-item-options>
-        <a ion-button color="primary" [routerLink]="['/users', user.id]" icon-left>
+        <a ion-button color="primary" (click)="openPage(user)" icon-left>
           <ion-icon name="text"></ion-icon>
           Editar
         </a>
@@ -27,6 +27,6 @@
     </ion-item-sliding>
   </ion-list>
   <ion-fab right bottom>
-    <a ion-fab color="danger" routerLink="/users/new"><ion-icon name="add"></ion-icon></a>
+    <a ion-fab color="danger" (click)="openPage()"><ion-icon name="add"></ion-icon></a>
   </ion-fab>
 </ion-content>
